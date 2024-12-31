@@ -1,22 +1,6 @@
 const verbs = [];
 let currentVerb = null;
 
-// Firebase 설정
-const firebaseConfig = {
-   apiKey: "AIzaSyCbWxey_0K8A7IQIzRTgZnRJfA8d6xmSos",
-    authDomain: "spanishwordbook.firebaseapp.com",
-    databaseURL: "https://spanishwordbook-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "spanishwordbook",
-    storageBucket: "spanishwordbook.firebasestorage.app",
-    messagingSenderId: "351450154597",
-    appId: "1:351450154597:web:da8ea931406cb1c905288c",
-    measurementId: "G-BW6EV7KWX4"  
-};
-
-// Firebase 초기화
-const app = firebase.initializeApp(firebaseConfig);
-const database = firebase.database();
-
 function uploadExcel(event) {
     const file = event.target.files[0];
     if (!file) return;
