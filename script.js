@@ -1,6 +1,21 @@
 const verbs = [];
 let currentVerb = null;
 
+// Firebase 설정
+const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+    databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT_ID.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
+};
+
+// Firebase 초기화
+const app = firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
 function uploadExcel(event) {
     const file = event.target.files[0];
     if (!file) return;
@@ -26,6 +41,7 @@ function uploadExcel(event) {
             });
         });
 
+        saveToFirebase();
         filterVerbs();
     };
     reader.readAsArrayBuffer(file);
@@ -55,6 +71,7 @@ function filterVerbs() {
             e.stopPropagation();
             const index = verbs.indexOf(verb);
             verbs.splice(index, 1);
+            saveToFirebase();
             filterVerbs();
         };
 
@@ -66,6 +83,7 @@ function filterVerbs() {
 function deleteAllVerbs() {
     if (confirm('Are you sure you want to delete all verbs?')) {
         verbs.length = 0;
+        saveToFirebase();
         filterVerbs();
         document.getElementById('verb-details').style.display = 'none';
     }
@@ -101,6 +119,7 @@ function showVerbDetails(verb) {
             cell.textContent = conjugation || '-';
             cell.addEventListener('input', () => {
                 verb[tense][index] = cell.textContent;
+                saveToFirebase();
             });
             row.appendChild(cell);
         });
@@ -121,6 +140,7 @@ function speakVerb() {
 function saveChanges() {
     if (currentVerb) {
         alert('Changes saved successfully!');
+        saveToFirebase();
     } else {
         alert('No verb selected to save.');
     }
@@ -142,3 +162,20 @@ function downloadExcel() {
     XLSX.utils.book_append_sheet(workbook, worksheet, "Verbs");
     XLSX.writeFile(workbook, "verbs.xlsx");
 }
+
+function saveToFirebase() {
+    firebase.database().ref('verbs').set(verbs);
+}
+
+function loadFromFirebase() {
+    firebase.database().ref('verbs').once('value', (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+            verbs.push(...data);
+            filterVerbs();
+        }
+    });
+}
+
+// 페이지 로드 시 데이터 로드
+window.onload = loadFromFirebase;
