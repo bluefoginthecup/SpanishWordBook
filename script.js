@@ -3,13 +3,14 @@ let currentVerb = null;
 
 // Firebase 설정
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
+   apiKey: "AIzaSyCbWxey_0K8A7IQIzRTgZnRJfA8d6xmSos",
+    authDomain: "spanishwordbook.firebaseapp.com",
+    databaseURL: "https://spanishwordbook-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "spanishwordbook",
+    storageBucket: "spanishwordbook.firebasestorage.app",
+    messagingSenderId: "351450154597",
+    appId: "1:351450154597:web:da8ea931406cb1c905288c",
+    measurementId: "G-BW6EV7KWX4"  
 };
 
 // Firebase 초기화
