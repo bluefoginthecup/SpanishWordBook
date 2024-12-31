@@ -156,6 +156,7 @@ function saveToFirebase() {
 
     firebase.database().ref('verbs').set(verbs);
 }
+
 function loadFromFirebase() {
     if (typeof firebase === "undefined") {
         console.error("Firebase is not defined. Ensure Firebase SDK is properly loaded.");
@@ -171,10 +172,22 @@ function loadFromFirebase() {
     });
 }
 
+// Send to Firebase 버튼 이벤트 핸들러
+document.getElementById('send-to-firebase').addEventListener('click', () => {
+    if (typeof firebase === 'undefined') {
+        console.error("Firebase is not defined. Ensure Firebase SDK is properly loaded.");
+        return;
+    }
 
-
-
+    firebase.database().ref('verbs').set(verbs)
+        .then(() => {
+            alert('Data successfully sent to Firebase!');
+        })
+        .catch((error) => {
+            console.error('Error sending data to Firebase:', error);
+            alert('Failed to send data to Firebase.');
+        });
+});
 
 // 페이지 로드 시 데이터 로드
 window.onload = loadFromFirebase;
-
