@@ -148,7 +148,14 @@ function downloadExcel() {
     XLSX.writeFile(workbook, "verbs.xlsx");
 }
 
+function saveToFirebase() {
+    if (typeof firebase === "undefined") {
+        console.error("Firebase is not defined. Ensure Firebase SDK is properly loaded.");
+        return;
+    }
 
+    firebase.database().ref('verbs').set(verbs);
+}
 function loadFromFirebase() {
     if (typeof firebase === "undefined") {
         console.error("Firebase is not defined. Ensure Firebase SDK is properly loaded.");
@@ -164,14 +171,7 @@ function loadFromFirebase() {
     });
 }
 
-function saveToFirebase() {
-    if (typeof firebase === "undefined") {
-        console.error("Firebase is not defined. Ensure Firebase SDK is properly loaded.");
-        return;
-    }
 
-    firebase.database().ref('verbs').set(verbs);
-}
 
 
 
