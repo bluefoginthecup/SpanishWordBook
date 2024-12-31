@@ -1,48 +1,93 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spanish Verb Conjugator</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div id="left-pane">
-        <input type="text" id="search" placeholder="Search for a verb..." oninput="filterVerbs()">
-        <input type="file" id="file-upload" accept=".xlsx, .xls" onchange="uploadExcel(event)">
-        <div class="button-group">
-            <button onclick="resetFileUpload()" class="action-button">Reset File</button>
-            <button onclick="downloadExcel()" class="action-button">Download Excel</button>
-            <button onclick="deleteAllVerbs()" class="action-button">Delete All</button>
-        </div>
-        <p id="verb-count" class="verb-count"></p>
-        <ul id="verb-list"></ul>
-    </div>
-
-    <div id="right-pane">
-        <div id="verb-details" class="verb-details" style="display:none;">
-            <h2 id="verb-infinitive"></h2>
-            <button id="speak-button" onclick="speakVerb()">Speak</button>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Person</th>
-                        <th>Present Tense</th>
-                        <th>Past Tense</th>
-                        <th>Past Imperfect</th>
-                        <th>Future Tense</th>
-                    </tr>
-                </thead>
-                <tbody id="verb-conjugations"></tbody>
-            </table>
-            <div class="buttons">
-                <button onclick="saveChanges()">Save</button>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Spanish Verb Conjugator</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div id="left-pane">
+            <input
+                type="text"
+                id="search"
+                placeholder="Search for a verb..."
+                oninput="filterVerbs()" />
+            <input
+                type="file"
+                id="file-upload"
+                accept=".xlsx, .xls"
+                onchange="uploadExcel(event)" />
+            <div class="button-group">
+                <button onclick="resetFileUpload()" class="action-button">
+                    Reset File
+                </button>
+                <button onclick="downloadExcel()" class="action-button">
+                    Download Excel
+                </button>
+                <button onclick="deleteAllVerbs()" class="action-button">
+                    Delete All
+                </button>
             </div>
+            <p id="verb-count" class="verb-count"></p>
+            <ul id="verb-list"></ul>
         </div>
-        <img id="example-image" src="" alt="Example image" style="display:none;">
-    </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    <script src="script.js"></script>
-</body>
+        <div id="right-pane">
+            <div id="verb-details" class="verb-details" style="display: none">
+                <h2 id="verb-infinitive"></h2>
+                <button id="speak-button" onclick="speakVerb()">Speak</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Person</th>
+                            <th>Present Tense</th>
+                            <th>Past Tense</th>
+                            <th>Past Imperfect</th>
+                            <th>Future Tense</th>
+                        </tr>
+                    </thead>
+                    <tbody id="verb-conjugations"></tbody>
+                </table>
+                <div class="buttons">
+                    <button onclick="saveChanges()">Save</button>
+                </div>
+            </div>
+            <img
+                id="example-image"
+                src=""
+                alt="Example image"
+                style="display: none" />
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+        <script src="script.js"></script>
+        
+        <!--// firebase 스크립트 추가-->
+        <script type="module">
+            // Import the functions you need from the SDKs you need
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+            import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
+            // TODO: Add SDKs for Firebase products that you want to use
+            // https://firebase.google.com/docs/web/setup#available-libraries
+
+            // Your web app's Firebase configuration
+            // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+            const firebaseConfig = {
+                apiKey: "AIzaSyCbWxey_0K8A7IQIzRTgZnRJfA8d6xmSos",
+                authDomain: "spanishwordbook.firebaseapp.com",
+                projectId: "spanishwordbook",
+                storageBucket: "spanishwordbook.firebasestorage.app",
+                messagingSenderId: "351450154597",
+                appId: "1:351450154597:web:da8ea931406cb1c905288c",
+                measurementId: "G-BW6EV7KWX4"
+            };
+
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const analytics = getAnalytics(app);
+        </script>
+          <!--// firebase 스크립트 끝-->
+        
+    </body>
 </html>
