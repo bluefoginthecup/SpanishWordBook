@@ -63,22 +63,29 @@
        
         
         <!--// firebase 스크립트 추가-->
-      <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"></script>
-    <script>
-    // Firebase 초기화
-    const firebaseConfig = {
-        apiKey: "AIzaSyCbWxey_0K8A7IQIzRTgZnRJfA8d6xmSos",
-        authDomain: "spanishwordbook.firebaseapp.com",
-        databaseURL: "https://spanishwordbook.firebaseio.com",
-        projectId: "spanishwordbook",
-        storageBucket: "spanishwordbook.firebasestorage.app",
-        messagingSenderId: "351450154597",
-        appId: "1:351450154597:web:da8ea931406cb1c905288c",
-        measurementId: "G-BW6EV7KWX4"
-    };
-    const app = firebase.initializeApp(firebaseConfig);
-    const database = firebase.database();
+      <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyCbWxey_0K8A7IQIzRTgZnRJfA8d6xmSos",
+    authDomain: "spanishwordbook.firebaseapp.com",
+    databaseURL: "https://spanishwordbook-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "spanishwordbook",
+    storageBucket: "spanishwordbook.firebasestorage.app",
+    messagingSenderId: "351450154597",
+    appId: "1:351450154597:web:da8ea931406cb1c905288c",
+    measurementId: "G-BW6EV7KWX4"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
 </script>
           <!--// firebase 스크립트 끝-->
 
