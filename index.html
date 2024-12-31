@@ -83,10 +83,13 @@
             };
 
             // Firebase 초기화
-            console.log(firebase); // 이 줄을 추가하여 firebase 객체 확인
+            document.addEventListener('DOMContentLoaded', () => {
             const app = firebase.initializeApp(firebaseConfig);
             const database = firebase.database();
+            loadFromFirebase(); // Firebase 초기화 후 데이터 로드
+            });
 
+        
             const analytics = getAnalytics(app);
         </script>
           <!--// firebase 스크립트 끝-->
