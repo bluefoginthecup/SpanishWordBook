@@ -148,11 +148,13 @@ function downloadExcel() {
     XLSX.writeFile(workbook, "verbs.xlsx");
 }
 
-function saveToFirebase() {
-    firebase.database().ref('verbs').set(verbs);
-}
 
 function loadFromFirebase() {
+    if (typeof firebase === "undefined") {
+        console.error("Firebase is not defined. Ensure Firebase SDK is properly loaded.");
+        return;
+    }
+
     firebase.database().ref('verbs').once('value', (snapshot) => {
         const data = snapshot.val();
         if (data) {
@@ -162,5 +164,17 @@ function loadFromFirebase() {
     });
 }
 
+function saveToFirebase() {
+    if (typeof firebase === "undefined") {
+        console.error("Firebase is not defined. Ensure Firebase SDK is properly loaded.");
+        return;
+    }
+
+    firebase.database().ref('verbs').set(verbs);
+}
+
+
+
 // 페이지 로드 시 데이터 로드
 window.onload = loadFromFirebase;
+
